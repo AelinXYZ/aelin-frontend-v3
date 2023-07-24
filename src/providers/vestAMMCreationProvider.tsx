@@ -20,11 +20,25 @@ export const enum VestAmmCreationStep {
   Access,
 }
 
+export const Amm = {
+  Balancer: 'Balancer',
+  Curve: 'Curve',
+  Sushiswap: 'Sushiswap',
+}
+
+type AmmType = (typeof Amm)[keyof typeof Amm]
+
 export type VestAmmCreationContextType = {
   strategy?: VestAmmStrategy
   setStrategy: Dispatch<SetStateAction<VestAmmStrategy | undefined>>
   creationStep: VestAmmCreationStep
   setCreationStep: Dispatch<SetStateAction<VestAmmCreationStep>>
+  name?: string
+  setName: Dispatch<SetStateAction<string | undefined>>
+  symbol?: string
+  setSymbol: Dispatch<SetStateAction<string | undefined>>
+  amm: AmmType
+  setAmm: Dispatch<SetStateAction<AmmType>>
 }
 
 const VestAmmCreationContext = createContext<VestAmmCreationContextType>({} as any)
@@ -34,8 +48,9 @@ export const VestAmmCreationContextProvider = ({ children }: { children: ReactNo
   const [creationStep, setCreationStep] = useState<VestAmmCreationStep>(
     VestAmmCreationStep.Strategy,
   )
-
-  console.log({ creationStep })
+  const [name, setName] = useState<string>()
+  const [symbol, setSymbol] = useState<string>()
+  const [amm, setAmm] = useState<AmmType>(Amm.Balancer)
 
   return (
     <VestAmmCreationContext.Provider
@@ -44,6 +59,12 @@ export const VestAmmCreationContextProvider = ({ children }: { children: ReactNo
         setStrategy,
         creationStep,
         setCreationStep,
+        name,
+        setName,
+        symbol,
+        setSymbol,
+        amm,
+        setAmm,
       }}
     >
       {children}
