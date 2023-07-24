@@ -18,6 +18,7 @@ import NftCreationContextProvider from '@/src/providers/nftCreationState'
 import StakingRewardsProvider from '@/src/providers/stakingRewardsProvider'
 import ThemeProvider from '@/src/providers/themeContextProvider'
 import TransactionModalProvider from '@/src/providers/transactionModalProvider'
+import VestAMMCreationProvider from '@/src/providers/vestAMMCreationProvider'
 import Web3ConnectionProvider from '@/src/providers/web3ConnectionProvider'
 
 // Should be rendered on client side only!
@@ -68,23 +69,25 @@ function App({ Component, pageProps }: AppProps) {
                   revalidateOnFocus: false,
                 }}
               >
-                <StakingRewardsProvider>
-                  <TransactionModalProvider>
-                    <NotificationsProvider>
-                      <NftCreationContextProvider>
-                        <SafeSuspense>
-                          <TokenIconsProvider>
-                            <Header />
-                            <Component {...pageProps} />
-                            <Toast />
-                          </TokenIconsProvider>
-                        </SafeSuspense>
-                        <TooltipConfig />
-                        <MobileMenu />
-                      </NftCreationContextProvider>
-                    </NotificationsProvider>
-                  </TransactionModalProvider>
-                </StakingRewardsProvider>
+                <VestAMMCreationProvider>
+                  <StakingRewardsProvider>
+                    <TransactionModalProvider>
+                      <NotificationsProvider>
+                        <NftCreationContextProvider>
+                          <SafeSuspense>
+                            <TokenIconsProvider>
+                              <Header />
+                              <Component {...pageProps} />
+                              <Toast />
+                            </TokenIconsProvider>
+                          </SafeSuspense>
+                          <TooltipConfig />
+                          <MobileMenu />
+                        </NftCreationContextProvider>
+                      </NotificationsProvider>
+                    </TransactionModalProvider>
+                  </StakingRewardsProvider>
+                </VestAMMCreationProvider>
               </SWRConfig>
             </ThemeProvider>
           </LayoutStatusProvider>
