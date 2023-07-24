@@ -1,16 +1,13 @@
 import { NextPage } from 'next'
 import Head from 'next/head'
 import { ReactNode, useEffect, useState } from 'react'
-import styled from 'styled-components'
 
+import Layout from '@/src/components/vestamm/creation/Layout'
+import Recap from '@/src/components/vestamm/creation/Recap'
+import Stepper from '@/src/components/vestamm/creation/Stepper'
+import Naming from '@/src/components/vestamm/creation/steps/Naming'
 import { StrategySelection } from '@/src/components/vestamm/creation/steps/StrategySelection'
 import { VestAmmCreationStep, useVestAmmCreation } from '@/src/providers/vestAMMCreationProvider'
-
-const Wrapper = styled.div`
-  margin: 0 auto 30px;
-  max-width: 100%;
-  width: ${({ theme }) => theme.layout.maxWidth};
-`
 
 const Create: NextPage = () => {
   const { creationStep } = useVestAmmCreation()
@@ -20,6 +17,9 @@ const Create: NextPage = () => {
     switch (creationStep) {
       case VestAmmCreationStep.Strategy:
         setStep(() => <StrategySelection />)
+        break
+      case VestAmmCreationStep.Naming:
+        setStep(() => <Naming />)
         break
       default:
         setStep(() => <WrongStep />)
@@ -31,7 +31,11 @@ const Create: NextPage = () => {
       <Head>
         <title>Create VestAMM</title>
       </Head>
-      <Wrapper>{step}</Wrapper>
+      <Layout>
+        <Stepper />
+        {step}
+        <Recap />
+      </Layout>
     </>
   )
 }

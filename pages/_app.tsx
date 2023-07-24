@@ -18,7 +18,6 @@ import NftCreationContextProvider from '@/src/providers/nftCreationState'
 import StakingRewardsProvider from '@/src/providers/stakingRewardsProvider'
 import ThemeProvider from '@/src/providers/themeContextProvider'
 import TransactionModalProvider from '@/src/providers/transactionModalProvider'
-import VestAMMCreationProvider from '@/src/providers/vestAMMCreationProvider'
 import Web3ConnectionProvider from '@/src/providers/web3ConnectionProvider'
 
 // Should be rendered on client side only!
@@ -27,6 +26,10 @@ const TokenIconsProvider = dynamic(() => import('@/src/providers/tokenIconsProvi
 })
 
 const NotificationsProvider = dynamic(() => import('@/src/providers/notificationsProvider'), {
+  ssr: false,
+})
+
+const VestAMMCreationProvider = dynamic(() => import('@/src/providers/vestAMMCreationProvider'), {
   ssr: false,
 })
 

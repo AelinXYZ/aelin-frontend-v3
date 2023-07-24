@@ -109,3 +109,18 @@ export const TextfieldCSS = css<TexfieldCSSProps>`
 export const Textfield = styled.input<TextfieldProps>`
   ${TextfieldCSS}
 `
+
+const Label = styled.span``
+
+interface LabeledTextfieldProps extends TextfieldProps {
+  label: string
+}
+
+export const LabeledTextfield = ({ label, ...rest }: LabeledTextfieldProps) => {
+  return (
+    <div>
+      <Label>{label}</Label>
+      <Textfield {...rest} />
+    </div>
+  )
+}
